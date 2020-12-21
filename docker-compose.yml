@@ -1,0 +1,25 @@
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+version: '3'
+
+#Define services
+services:
+
+  #PostgreSQL Database for the application
+  bankservice-postgres:
+    image: "postgres:9.6-alpine"
+    container_name: bankservice-postgres
+    #Volume mounted for database for the storage
+    volumes:
+      - bankservice-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432 # Forward the exposed port 5432 on the container to port 5432 on the host machine
+
+    #Environment variable for DB name, user and password
+    environment:
+      - POSTGRES_DB=bankservice
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=123
+
+#Volumes for DB data
+volumes:
+  bankservice-data:
