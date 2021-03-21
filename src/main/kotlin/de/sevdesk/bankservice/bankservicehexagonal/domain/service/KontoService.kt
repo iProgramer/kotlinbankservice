@@ -10,7 +10,7 @@ class KontoService(private val kontoRepository: KontoRepository)
 
     fun anmelden(kontonummer: String, pin: String): Konto
     {
-        return this.kontoRepository.laden(kontonummer, pin) ?: throw KontoAnmeldungFehlgeschlagenException()
+        return this.kontoRepository.ladeKonto(kontonummer) ?: throw KontoAnmeldungFehlgeschlagenException()
     }
 
     fun legeKontoAn(konto: Konto) = this.kontoRepository.anlegen(konto)
@@ -32,7 +32,7 @@ class KontoService(private val kontoRepository: KontoRepository)
 
     fun ueberweisen(vonKonto: Konto, anKontonummer: String, betrag: Double, verwendungszweck: String): Transaktion?
     {
-        val anKonto = this.kontoRepository.ladeKontoOhnePin(anKontonummer)
+        val anKonto = this.kontoRepository.ladeKonto(anKontonummer)
 
         val buchungsdatum = LocalDateTime.now()
 

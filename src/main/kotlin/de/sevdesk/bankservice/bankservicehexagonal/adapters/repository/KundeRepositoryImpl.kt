@@ -1,8 +1,9 @@
 package de.sevdesk.bankservice.bankservicehexagonal.adapters.repository
 
+import de.sevdesk.bankservice.bankservicehexagonal.adapters.KundeDbEntity
+import de.sevdesk.bankservice.bankservicehexagonal.adapters.KundeFactory
 import de.sevdesk.bankservice.bankservicehexagonal.domain.entity.kunde.Kunde
 import de.sevdesk.bankservice.bankservicehexagonal.domain.ports.KundeRepository
-import de.sevdesk.bankservice.bankservicehexagonal.adapters.KundeFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
@@ -10,11 +11,12 @@ import org.springframework.stereotype.Repository
 class KundeRepositoryImpl
 @Autowired
 constructor(
-        val kundeDao: KundeDao) : KundeRepository
+    val kundeDao: KundeDao
+) : KundeRepository
 {
     override fun anlegen(kunde: Kunde): Int
     {
-        val kundeDbEntity = KundeFactory().fromDomain(kunde)
+        val kundeDbEntity = KundeDbEntity(kunde)
         val savedKunde = kundeDao.save(kundeDbEntity)
         return savedKunde.kundennummer!!
     }
@@ -36,4 +38,11 @@ constructor(
         }
     }
 
+    override fun ladeAlleKunden(): List<Kunde>
+    {
+        val kunden = this.kundeDao.findAll().toList()
+
+        return kunden.toList()
+            .map(KundeFactory()::toDomain)
+    }
 }

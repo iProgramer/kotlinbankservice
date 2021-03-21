@@ -9,4 +9,8 @@ interface KundeRepository
     fun bearbeiten(kunde: Kunde)
 
     fun laden(kundennummer: Int): Kunde?
+
+    fun ladeAlleKunden(): List<Kunde>
+
+
 }

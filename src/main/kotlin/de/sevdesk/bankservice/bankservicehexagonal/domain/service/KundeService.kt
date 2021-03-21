@@ -1,14 +1,17 @@
 package de.sevdesk.bankservice.bankservicehexagonal.domain.service
 
 import de.sevdesk.bankservice.bankservicehexagonal.domain.entity.konto.Konto
-import de.sevdesk.bankservice.bankservicehexagonal.domain.entity.kunde.Geschlecht
 import de.sevdesk.bankservice.bankservicehexagonal.domain.entity.kunde.Kunde
 import de.sevdesk.bankservice.bankservicehexagonal.domain.ports.KundeRepository
-import java.time.LocalDate
 
 class KundeService(private val kundeRepository: KundeRepository)
 {
-    fun erstelleKunde(kunde: Kunde) = this.kundeRepository.anlegen(kunde)
+    fun erstelleKunde(kunde: Kunde): Kunde
+    {
+        val kundennummer = this.kundeRepository.anlegen(kunde)
+        kunde.kundennummer = kundennummer
+        return kunde
+    }
 
     fun zeigeKundendaten(kundennummer: Int): Kunde
     {
@@ -27,6 +30,11 @@ class KundeService(private val kundeRepository: KundeRepository)
         val kunde = this.kundeRepository.laden(kundennummer)
 
         return kunde?.konten ?: throw KundeNichtGefundenException()
+    }
+
+    fun zeigeAlleKunden(): List<Kunde>
+    {
+        return this.kundeRepository.ladeAlleKunden()
     }
 
 }

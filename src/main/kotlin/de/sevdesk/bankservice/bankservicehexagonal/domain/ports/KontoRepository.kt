@@ -8,12 +8,12 @@ interface KontoRepository
 
     fun anlegen(konto: Konto): String
 
-    fun laden(kontonummer: String, pin: String): Konto?
-
     fun erstelleTransaktion(transaktion: Transaktion)
 
-    fun ueberweisen(vonTransaktion: Transaktion, anTransaktion: Transaktion)
+    fun ueberweisen(von: Transaktion, an: Transaktion)
 
-    fun ladeKontoOhnePin(kontonummer: String): Konto
+    fun ladeKonto(kontonummer: String): Konto
+
+    fun zeigeTransaktionen(kontonummer: String): List<Transaktion>
 
 }

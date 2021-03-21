@@ -3,14 +3,14 @@ package de.sevdesk.bankservice.bankservicehexagonal.domain.entity.konto
 import de.sevdesk.bankservice.bankservicehexagonal.domain.entity.kunde.Kunde
 
 class Tagesgeldkonto(
-        name: String,
-        kontonummer: String,
-        inhaber: Kunde,
-        private var zinsgutschrift: Zinsgutschrift,
+    name: String,
+    kontonummer: String,
+    inhaber: Kunde,
+    private var zinsgutschriftIntervall: ZinsgutschriftIntervall,
 ) : Konto(name, kontonummer, inhaber),
-        Verzinsbar
+    Verzinsbar
 {
 
-    override fun getZinsgutschrift() = zinsgutschrift
+    override fun getZinsgutschriftIntervall() = zinsgutschriftIntervall
 
 }

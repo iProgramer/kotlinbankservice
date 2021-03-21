@@ -1,6 +1,6 @@
 package de.sevdesk.bankservice.bankservicehexagonal.domain.entity.konto
 
-enum class Zinsgutschrift
+enum class ZinsgutschriftIntervall
 {
 
     MONTALICH,

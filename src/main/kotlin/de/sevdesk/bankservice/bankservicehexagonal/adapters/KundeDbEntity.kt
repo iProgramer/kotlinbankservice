@@ -9,22 +9,32 @@ import javax.persistence.Id
 
 @Entity
 data class KundeDbEntity(
-        @Id
-        @GeneratedValue
-        var kundennummer: Int?,
+    @Id
+    @GeneratedValue
+    var kundennummer: Int?,
 
-        @Column
-        var vorname: String,
+    @Column
+    var vorname: String,
 
-        @Column
-        var nachname: String,
+    @Column
+    var nachname: String,
 
-        @Column
-        var geburtsdatum: LocalDate,
+    @Column
+    var geburtsdatum: LocalDate,
 
-        @Column
-        var geschlecht: String,
+    @Column
+    var geschlecht: String,
 )
 {
 
+    /**
+     * Mapping Constructor
+     */
+    constructor(kunde: Kunde) : this(
+        kunde.kundennummer,
+        kunde.vorname,
+        kunde.nachname,
+        kunde.geburtsdatum,
+        kunde.geschlecht.toString()
+    )
 }

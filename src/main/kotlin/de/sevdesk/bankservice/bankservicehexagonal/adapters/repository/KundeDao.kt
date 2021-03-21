@@ -6,5 +6,3 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface KundeDao : CrudRepository<KundeDbEntity, Int>
-{
-}

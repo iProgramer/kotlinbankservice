@@ -1,4 +1,4 @@
-package de.sevdesk.bankservice.bankservicehexagonal.config
+package de.sevdesk.bankservice.bankservicehexagonal.adapters.config
 
 import de.sevdesk.bankservice.bankservicehexagonal.domain.ports.KundeRepository
 import de.sevdesk.bankservice.bankservicehexagonal.domain.service.KundeService
